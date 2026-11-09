@@ -1,7 +1,7 @@
 # Tiến độ học: {{TOPIC}}
 
-> Agent đọc file này đầu mỗi phiên. Do skill `learning-notes` cập nhật
-> (bảng "Tiến độ theo nguồn" được skill `add-source` thêm dòng khi có nguồn mới).
+> Agent đọc file này đầu mỗi phiên. Do skill `learn-notes` cập nhật
+> (bảng "Tiến độ theo nguồn" được skill `learn-add-source` thêm dòng khi có nguồn mới).
 
 ## Mục tiêu
 - _(người học tự điền: học để làm được gì, đến mức nào)_

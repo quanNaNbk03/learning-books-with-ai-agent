@@ -1,13 +1,27 @@
 ---
-name: add-source
-description: Thêm tài liệu mới (PDF, EPUB, Markdown, TXT hoặc bài viết web) vào docs/ — chuyển sang markdown theo chương kèm hình ảnh, viết INDEX.md cho nguồn, cập nhật docs/CATALOG.md và bảng tiến độ trong learning/INDEX.md. Dùng khi người học tạo thư mục mới trong docs/, bỏ file vào docs/inbox/, hoặc nói "thêm tài liệu", "add source", "convert sách này".
+name: learn-add-source
+description: Chỉ dùng trong learning workspace (thư mục có AGENTS.md, docs/CATALOG.md, learning/INDEX.md). Thêm tài liệu mới (PDF, EPUB, Markdown, TXT hoặc bài viết web) vào docs/ — chuyển sang markdown theo chương kèm hình ảnh, viết INDEX.md cho nguồn, cập nhật docs/CATALOG.md và bảng tiến độ trong learning/INDEX.md. Dùng khi người học tạo thư mục mới trong docs/, bỏ file vào docs/inbox/, hoặc nói "thêm tài liệu", "add source", "convert sách này".
 ---
 
-# Skill: add-source
+# Skill: learn-add-source
 
 Mục tiêu: mỗi nguồn mới đều có cùng cấu trúc — markdown theo chương có số trang,
 hình ảnh tách riêng, mục lục tốt và ghi chú chất lượng chuyển đổi — để agent tìm
 đúng chỗ, xem được hình và trích dẫn chính xác.
+
+## 0. Điều kiện chạy (kiểm tra trước tiên)
+
+Skill này được cài **global**, nên có mặt ở mọi dự án. Chỉ chạy khi thư mục hiện tại là
+**learning workspace**, tức là có cả `AGENTS.md`, `docs/CATALOG.md` và `learning/INDEX.md`.
+
+- Thiếu một trong ba → **dừng**, không tạo hay sửa file nào. Nói với người học: đây không phải
+  learning workspace; nếu muốn biến thư mục này thành workspace thì dùng skill `learn-new-workspace`.
+- Đang ở trong repo code (vd. có `go.mod`, `package.json`) mà người học nói "thêm tài liệu" →
+  gần như chắc là ý khác (tài liệu cho code), không phải skill này.
+
+`SKILL_DIR` dưới đây là **thư mục chứa file SKILL.md này** (thường là
+`~/.agents/skills/learn-add-source` hoặc `~/.claude/skills/learn-add-source`). Mọi đường dẫn
+`docs/`, `learning/` thì tính từ thư mục workspace hiện tại.
 
 ## Đầu vào (một trong hai)
 
@@ -38,15 +52,16 @@ Chạy từ **thư mục gốc của workspace** (nơi có `AGENTS.md`):
 
 ```bash
 # Cách A
-python .agents/skills/add-source/scripts/convert.py docs/<id>
+python "$SKILL_DIR/scripts/convert.py" docs/<id>
 # Cách B
-python .agents/skills/add-source/scripts/convert.py docs/inbox/<file> --id <id>
+python "$SKILL_DIR/scripts/convert.py" docs/inbox/<file> --id <id>
 ```
 
 Kết quả: `docs/<id>/chapters/*.md` (có `<!-- page N -->` và link
 `![hình tr.N](../images/pNNNN-MM.png)`), `docs/<id>/images/`, `chapters/_manifest.json`.
 
-- Lần đầu cần cài thư viện: `pip install -r .agents/skills/add-source/scripts/requirements.txt`
+- Lần đầu cần cài thư viện: `pip install -r "$SKILL_DIR/scripts/requirements.txt"`
+  (thường đã cài một lần trên máy; Codex trong sandbox chặn mạng thì nhờ người học tự chạy)
 - Chương quá dài (> ~40 trang) → chạy lại với `--toc-level 2 --force`.
 - PDF không có mục lục → script chia theo `--pages-per-part` (mặc định 30 trang).
 - Hình quá mờ để đọc chữ → chạy lại `--dpi 200 --force`. Quá nhiều hình rác
@@ -74,7 +89,7 @@ Kết quả: `docs/<id>/chapters/*.md` (có `<!-- page N -->` và link
   (cài Tesseract rồi chạy lại), chưa nên dùng nguồn này để trích dẫn.
 
 ### 4. Viết `docs/<id>/INDEX.md`
-Dùng mẫu `.agents/skills/add-source/templates/source-INDEX.md`. Với mỗi chương:
+Dùng mẫu `$SKILL_DIR/templates/source-INDEX.md`. Với mỗi chương:
 đọc lướt nội dung, viết tóm tắt 1–2 dòng, 3–6 thuật ngữ chính, và liệt kê
 **hình quan trọng** (file + mô tả ngắn, vd. `p0045-01.png — sơ đồ luồng điện 2N`).
 Chỉ mô tả hình đã thực sự mở xem. Ghi các vấn đề từ bước 3 vào
@@ -103,4 +118,4 @@ sao chép vào `docs/<id>/source.*`). Không tự xóa file của người học
 ## Không làm
 - Không viết tóm tắt cho chương chưa đọc, không mô tả hình chưa mở xem.
 - Không bịa metadata (năm, phiên bản); thiếu thì ghi "chưa rõ".
-- Không tạo notes học tập ở bước này — đó là việc của skill `learning-notes`.
+- Không tạo notes học tập ở bước này — đó là việc của skill `learn-notes`.

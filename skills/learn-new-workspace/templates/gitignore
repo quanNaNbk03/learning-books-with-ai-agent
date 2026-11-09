@@ -1,0 +1,12 @@
+# Tài liệu chưa xử lý
+docs/inbox/*
+!docs/inbox/.gitkeep
+
+# Bỏ comment nếu không muốn đưa bản gốc (PDF lớn, có bản quyền) và hình lên git
+# docs/*/*.pdf
+# docs/*/*.epub
+# docs/*/images/
+
+# File tạm của convert.py
+docs/*/.convert-tmp/
+__pycache__/

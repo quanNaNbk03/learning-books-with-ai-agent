@@ -2,7 +2,7 @@
 
 > Agent đọc file này **đầu tiên** khi cần tìm thông tin. Mỗi nguồn chỉ 1 dòng;
 > chi tiết từng chương nằm trong `docs/<id>/INDEX.md`.
-> File này do skill `add-source` cập nhật.
+> File này do skill `learn-add-source` cập nhật.
 
 ## Danh sách nguồn
 

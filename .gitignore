@@ -1,12 +1,3 @@
-# Tài liệu chưa xử lý
-docs/inbox/*
-!docs/inbox/.gitkeep
-
-# Bỏ comment nếu không muốn đưa bản gốc (PDF lớn, có bản quyền) và hình lên git
-# docs/*/*.pdf
-# docs/*/*.epub
-# docs/*/images/
-
-# File tạm của convert.py
-docs/*/.convert-tmp/
+.DS_Store
 __pycache__/
+_to_delete/

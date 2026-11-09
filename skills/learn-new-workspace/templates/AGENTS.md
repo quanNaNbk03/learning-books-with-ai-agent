@@ -79,7 +79,7 @@ nguyên đến khi người học đổi.
   gần đó → **mở file hình để xem** trước khi giải thích; đừng đoán nội dung hình từ chú thích.
   Chữ trong hình đôi khi có sẵn giữa `<!-- Start of picture text -->` … `<!-- End ... -->`.
 - Có tài liệu mới trong `docs/inbox/`, hoặc thư mục `docs/<id>/` có file gốc nhưng chưa có
-  `chapters/` → nhắc người học và dùng skill `add-source`.
+  `chapters/` → nhắc người học và dùng skill `learn-add-source`.
 
 ## 5. Dẫn chứng (bắt buộc)
 
@@ -158,7 +158,7 @@ Sau mỗi phần (một khái niệm lớn hoặc một mục của chương):
   "giải thích bằng lời của bạn trong 2–3 câu".
 - Chấm xong: với **mỗi câu**, nói vì sao đáp án đúng là đúng **và vì sao từng đáp án
   sai là sai**, kèm nguồn. Câu sai → giải thích lại theo cách khác, không lặp nguyên văn.
-- Ghi nhớ các câu người học trả lời sai để skill `learning-notes` lưu vào
+- Ghi nhớ các câu người học trả lời sai để skill `learn-notes` lưu vào
   `learning/questions.md`.
 
 ## 9. Thực hành (chỉ khi mục 0 "Có thực hành" = có)
@@ -174,7 +174,7 @@ ngắn**; người học có thể bỏ qua:
   trong tài liệu → `[kiến thức chung]`. Nói rõ khi cú pháp trong sách đã cũ.
 - Lệnh có thể làm mất kết nối hoặc dữ liệu → đánh dấu ⚠️ và nói cách khôi phục.
 - Bạn **không tự chạy** lệnh trên hệ thống của người học trừ khi được yêu cầu rõ ràng.
-- Người học làm xong và muốn lưu → skill `learning-notes` ghi vào `labs/<slug>.md`.
+- Người học làm xong và muốn lưu → skill `learn-notes` ghi vào `labs/<slug>.md`.
 
 ## 10. Thái độ
 
@@ -188,16 +188,18 @@ ngắn**; người học có thể bỏ qua:
 
 | Skill | Khi dùng |
 |---|---|
-| `.claude/skills/add-source/` | Thêm sách/tài liệu mới, cập nhật catalog và bảng tiến độ |
-| `.claude/skills/learning-notes/` | Người học nói "lưu lại", kết thúc phiên, xong một chủ đề hoặc một bài lab (đề xuất lưu, chờ đồng ý) |
+| `learn-add-source` | Thêm sách/tài liệu mới, cập nhật catalog và bảng tiến độ |
+| `learn-notes` | Người học nói "lưu lại", kết thúc phiên, xong một chủ đề hoặc một bài lab (đề xuất lưu, chờ đồng ý) |
+| `learn-new-workspace` | Người học nói "cập nhật theo template": nâng cấp mục 1–12 của file này, giữ mục 0 |
 
-Claude Code đọc cùng các skill này qua `.claude/skills` (symlink tới `.claude/skills`).
-Đọc `SKILL.md` của skill trước khi thực hiện.
+Các skill được cài **global** (`~/.agents/skills/` cho Codex, `~/.claude/skills/` cho Claude Code),
+không nằm trong workspace. Đọc `SKILL.md` của skill trước khi thực hiện.
+Không tìm thấy skill → báo người học kiểm tra cài đặt (README của repo template, mục cài đặt).
 
 ## 12. Không làm
 
 - Không sửa nội dung trong `docs/<id>/chapters/`, `images/` hay file gốc (trừ khi người học yêu cầu
   sửa lỗi chuyển đổi).
-- Không ghi vào `learning/` hay `labs/` khi chưa qua skill `learning-notes` và người học chưa xác nhận.
+- Không ghi vào `learning/` hay `labs/` khi chưa qua skill `learn-notes` và người học chưa xác nhận.
 - Không đọc nguồn ngoài phạm vi phiên mà không báo trước.
 - Không xóa file của người học.

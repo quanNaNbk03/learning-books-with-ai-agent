@@ -1,9 +1,9 @@
 ---
-name: learning-notes
-description: Lưu kiến thức trọng tâm của phiên học vào learning/ (notes theo chủ đề gộp nhiều nguồn, glossary, câu hỏi ôn tập, tiến độ theo nguồn và theo chủ đề) và bài thực hành vào labs/. Dùng khi người học nói "lưu lại", "save", "kết thúc phiên", "lưu bài lab", hoặc khi agent đề xuất lưu cuối một chủ đề.
+name: learn-notes
+description: Chỉ dùng trong learning workspace (thư mục có AGENTS.md, docs/CATALOG.md, learning/INDEX.md). Lưu kiến thức trọng tâm của phiên học vào learning/ (notes theo chủ đề gộp nhiều nguồn, glossary, câu hỏi ôn tập, tiến độ theo nguồn và theo chủ đề) và bài thực hành vào labs/. Dùng khi người học nói "lưu lại", "save", "kết thúc phiên", "lưu bài lab", hoặc khi agent đề xuất lưu cuối một chủ đề.
 ---
 
-# Skill: learning-notes
+# Skill: learn-notes
 
 Mục tiêu: biến cuộc hội thoại thành ghi chú **ngắn, có dẫn chứng, dễ ôn lại**.
 Không phải chép lại hội thoại.
@@ -11,6 +11,13 @@ Không phải chép lại hội thoại.
 Nguyên tắc chính: **notes theo chủ đề, tiến độ theo nguồn.** Dù phiên học một cuốn hay
 nhiều cuốn, kiến thức luôn được gộp vào file chủ đề; vị trí đọc của từng cuốn ghi riêng
 trong bảng tiến độ.
+
+## 0. Điều kiện chạy (kiểm tra trước tiên)
+
+Skill này được cài **global**, nên có mặt ở mọi dự án. Chỉ chạy khi thư mục hiện tại là
+**learning workspace**, tức là có cả `AGENTS.md`, `docs/CATALOG.md` và `learning/INDEX.md`.
+Thiếu một trong ba → **dừng**, không ghi file nào, và nói rõ lý do. Ở repo code, "lưu lại" gần
+như chắc là ý khác (commit, lưu file…), không phải skill này.
 
 ## Quy trình
 
